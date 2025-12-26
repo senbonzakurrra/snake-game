@@ -226,4 +226,24 @@ class SnakeGame {
     startGameLoop();
   }
  }
+
+  // Сброс игры к начальному состоянию
+  void reset() {
+    // Остановка текущего цикла и запуск новой игры
+    gameTimer?.cancel();
+    startNewGame();
+    // Обновление UI
+    onUpdate();
+  }
+
+  // Алиас для совместимости с UI
+  void onReset() => reset();
+
+  // Освобождение ресурсов
+  void dispose() {
+    gameTimer?.cancel();
+  }
+
+  // Устаревший заглушечный метод (оставлен для совместимости)
+  void dis() {}
 }

@@ -40,23 +40,6 @@ class _GameBoardState extends State<GameBoard> {
     final dy = details.delta.dy;
   }
 
-  // Определение направления по свайпу
-  // if (dx.abs() > dy.abs()) {
-  // Горизонтальный свайп
-  // if (dx > 0) {
-  // _handleKeyPress(Direction.right);
-  // } else {
-  // _handleKeyPress(Direction.left);
-  //}
-  //} else {
-  // Вертикальный свайп
-  //if (dy > 0) {
-  // _handleKeyPress(Direction.down);
-  //} else {
-  // _handleKeyPress(Direction.up);
-  // }
-  //}
-
   @override
   Widget build(BuildContext context) {
     final cellSize =
@@ -176,18 +159,6 @@ class _GameBoardState extends State<GameBoard> {
       ),
     );
 
-    // Кнопки управления игрой
-    // Padding(
-    //  padding: const EdgeInsets.all(16.0),
-    //  child: Row(
-    //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    //    children: []
-    // Кнопка паузы/продолжения
-    // ElevatedButton.icon(
-    //  onPressed: () => ,
-    // )
-    // ),
-    // )
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
