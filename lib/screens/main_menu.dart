@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:snake_game/images.dart';
+import 'package:snake_game/routing/app_routes.dart';
 import 'package:snake_game/screens/game_screen.dart';
 
 class SimpleMenuScreen extends StatelessWidget {
@@ -12,7 +14,7 @@ class SimpleMenuScreen extends StatelessWidget {
       body: Center(
         child: Stack(
           children: [
-            AppImages.logoImage(width: 1000, height: 500),
+            AppImages.logoImage(width: 1080, height: 1920),
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -22,12 +24,6 @@ class SimpleMenuScreen extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {
                       // Навигация к экрану игры
-                      final route = MaterialPageRoute<void>(
-                        builder: (context) {
-                          return const GameBoard();
-                        },
-                      );
-                      Navigator.of(context).push(route);
                     },
                     child: const Text('Начало игры'),
                   ),
@@ -35,6 +31,7 @@ class SimpleMenuScreen extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {
                       // Навигация к настройкам
+                      context.goNamed(settings);
                     },
                     child: const Text('Настройки'),
                   ),

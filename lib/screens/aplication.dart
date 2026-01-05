@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:snake_game/screens/main_menu.dart';
+import 'package:snake_game/routing/app_routes.dart';
 
 class Application extends StatelessWidget {
   const Application({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Material(child: SafeArea(child: SimpleMenuScreen())),
-    );
+    return MaterialApp.router(routerConfig: appRouter);
   }
 
   // ignore: unused_element
