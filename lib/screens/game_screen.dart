@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:snake_game/game/direction.dart';
+import 'package:snake_game/routing/app_routes.dart';
 import '../game/logic_game.dart';
 import '../widgets/game_board_widget.dart';
 import '../widgets/game_header_widget.dart';
@@ -16,13 +18,13 @@ class GameBoard extends StatefulWidget {
 class _GameBoardState extends State<GameBoard> {
   late SnakeGame _game;
 
-  @override 
+  @override
   void initState() {
     super.initState();
     _game = SnakeGame(onUpdate: _upDateGame);
   }
 
-  @override 
+  @override
   void dispose() {
     _game.dispose();
     super.dispose();
@@ -30,7 +32,7 @@ class _GameBoardState extends State<GameBoard> {
 
   void _upDateGame() {
     if (mounted) {
-      setState (() {});
+      setState(() {});
     }
   }
 
@@ -60,47 +62,48 @@ class _GameBoardState extends State<GameBoard> {
     _game.changeDirection(direction);
   }
 
-  @override 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Заголовок и счет 
+            // Заголовок и счет
             const GameHeaderWidget(),
 
             const SizedBox(height: 20),
 
             // Игровое поле
             Center(
-              child: GameBoardWidget(
-                game: _game,
-                onSwipe: _handleSwipe,
-              ),
+              child: GameBoardWidget(game: _game, onSwipe: _handleSwipe),
             ),
 
             const SizedBox(height: 20),
 
-            // Информация о состоянии игры 
+            // Информация о состоянии игры
             const GameInfoWidget(),
-            
+
             const SizedBox(height: 20),
 
-            // Управление игрой 
+            // Управление игрой
             GameControls(
               onPauseResume: () => _game.togglePause(),
-              onReset:  () => _game.reset(),
+              onReset: () => _game.reset(),
               onDirectionChange: _handleDirectionChange,
-            ) 
+            ),
+
+            // Кнопка назад
+            TextButton(
+              onPressed: () {
+                // Navigator.pop(context);
+                context.goNamed(root);
+              },
+              child: Text("Назад"),
+            ),
           ],
         ),
       ),
     );
   }
 }
-
-
-
-
-

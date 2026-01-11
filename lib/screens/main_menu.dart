@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snake_game/images.dart';
 import 'package:snake_game/routing/app_routes.dart';
-import 'package:snake_game/screens/game_screen.dart';
 
 class SimpleMenuScreen extends StatelessWidget {
   const SimpleMenuScreen({super.key});
@@ -24,6 +23,7 @@ class SimpleMenuScreen extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {
                       // Навигация к экрану игры
+                      context.goNamed(game);
                     },
                     child: const Text('Начало игры'),
                   ),

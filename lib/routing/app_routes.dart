@@ -1,20 +1,30 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:snake_game/screens/aplication.dart';
+import 'package:snake_game/screens/main_menu.dart';
 import 'package:snake_game/screens/settings.dart';
+import 'package:snake_game/widgets/game_board.dart';
 
 const root = '/';
-const settings = 'settings';
+const settings = '/settings';
+const game = '/game';
 
 final GoRouter appRouter = GoRouter(
   initialLocation: root,
   routes: [
     GoRoute(
+      path: settings,
+      name: settings,
+      builder: (context, state) => const Settings(),
+    ),
+    GoRoute(
+      path: game,
+      name: game,
+      builder: (context, state) => const GameBoard(),
+    ),
+    GoRoute(
       path: root,
-      builder: (context, state) => const Application(),
-      routes: <RouteBase>[
-        GoRoute(path: settings, builder: (context, state) => const Settings()),
-      ],
+      name: root,
+      builder: (context, state) => const SimpleMenuScreen(),
+      routes: <RouteBase>[],
     ),
   ],
 );

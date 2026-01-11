@@ -159,7 +159,6 @@ class _GameBoardState extends State<GameBoard> {
       ),
     );
 
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
