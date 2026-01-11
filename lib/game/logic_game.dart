@@ -46,7 +46,7 @@ class SnakeGame {
   Timer? gameTimer;
 
   // Игровая скорость (обновлений в секунду)
-  static int gameSpeed = 10;
+  static int gameSpeed = 3;
 
   // Игровой счет
   static int score = 0;

@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
+import 'package:snake_game/screens/game_screen.dart';
 import 'package:snake_game/screens/main_menu.dart';
 import 'package:snake_game/screens/settings.dart';
-import 'package:snake_game/widgets/game_board.dart';
 
 const root = '/';
 const settings = '/settings';

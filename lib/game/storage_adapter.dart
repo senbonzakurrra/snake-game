@@ -1,4 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:snake_game/game/logic_game.dart';
 
 class StorageAdapter {
   static const keySpeed = 'speed';
@@ -16,7 +17,7 @@ class StorageAdapter {
 
   Future<int> getSpeed() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getInt(keySpeed) ?? 1;
+    return prefs.getInt(keySpeed) ?? SnakeGame.gameSpeed;
   }
 
   Future<int> getRecord() async {

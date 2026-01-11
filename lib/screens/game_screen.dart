@@ -55,13 +55,6 @@ class _GameBoardState extends State<GameBoard> {
     }
   }
 
-  // Обработчик изменения направления из UI (кнопки)
-  void _handleDirectionChange(Direction direction) {
-    // Игнорируем ввод, если игра на паузе или уже окончена
-    if (SnakeGame.isPaused || SnakeGame.isGameOver) return;
-    _game.changeDirection(direction);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,25 +65,24 @@ class _GameBoardState extends State<GameBoard> {
             // Заголовок и счет
             const GameHeaderWidget(),
 
-            const SizedBox(height: 20),
-
             // Игровое поле
             Center(
               child: GameBoardWidget(game: _game, onSwipe: _handleSwipe),
             ),
 
-            const SizedBox(height: 20),
-
             // Информация о состоянии игры
             const GameInfoWidget(),
 
-            const SizedBox(height: 20),
+            const SizedBox(height: 100),
 
             // Управление игрой
             GameControls(
-              onPauseResume: () => _game.togglePause(),
-              onReset: () => _game.reset(),
-              onDirectionChange: _handleDirectionChange,
+              onPauseResume: () => setState(() {
+                _game.togglePause();
+              }),
+              onReset: () => setState(() {
+                _game.reset();
+              }),
             ),
 
             // Кнопка назад
