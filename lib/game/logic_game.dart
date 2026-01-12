@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:flutter/foundation.dart';
+
 import 'direction.dart';
 
 // Позиция на игровом поле
@@ -46,22 +48,21 @@ class SnakeGame {
   Timer? gameTimer;
 
   // Игровая скорость (обновлений в секунду)
-  static int gameSpeed = 3;
+  static double gameSpeed = 2;
 
   // Игровой счет
   static int score = 0;
 
   // Состояние игры
   static bool isGameOver = false;
+  final ValueNotifier<bool> gameFinished = ValueNotifier(false);
   static bool isPaused = false;
 
   // Callback для обновления UI
   final VoidCallback onUpdate;
 
   // Констуктор
-  SnakeGame({required this.onUpdate}) {
-    startNewGame();
-  }
+  SnakeGame({required this.onUpdate});
 
   // Начало новой игры
   void startNewGame() {

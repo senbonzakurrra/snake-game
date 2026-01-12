@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../game/logic_game.dart';
+import 'package:snake_game/game/logic_game.dart';
 
 class GameHeaderWidget extends StatelessWidget {
   const GameHeaderWidget({super.key});
-  
-   @override
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -34,12 +34,9 @@ class GameHeaderWidget extends StatelessWidget {
     );
   }
 
-    Widget _buildScoreWidget() {
+  Widget _buildScoreWidget() {
     return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: 8,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
         color: Colors.lightGreen,
         borderRadius: BorderRadius.circular(20),
@@ -62,5 +59,3 @@ class GameHeaderWidget extends StatelessWidget {
     );
   }
 }
-
-  

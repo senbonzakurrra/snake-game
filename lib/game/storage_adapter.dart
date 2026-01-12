@@ -5,22 +5,22 @@ class StorageAdapter {
   static const keySpeed = 'speed';
   static const keyRecord = 'record';
 
-  void setSpeed(int speed) async {
+  static void setSpeed(double speed) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt(keySpeed, speed);
+    await prefs.setDouble(keySpeed, speed);
   }
 
-  void setRecord(int record) async {
+  static void setRecord(int record) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt(keyRecord, record);
   }
 
-  Future<int> getSpeed() async {
+  static Future<double> getSpeed() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getInt(keySpeed) ?? SnakeGame.gameSpeed;
+    return prefs.getDouble(keySpeed) ?? SnakeGame.gameSpeed;
   }
 
-  Future<int> getRecord() async {
+  static Future<int> getRecord() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getInt(keyRecord) ?? 0;
   }

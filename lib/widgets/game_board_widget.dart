@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../game/logic_game.dart';
+import 'package:snake_game/game/logic_game.dart';
 
 class GameBoardWidget extends StatelessWidget {
   final SnakeGame game;

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snake_game/game/direction.dart';
 import 'package:snake_game/routing/app_routes.dart';
-import '../game/logic_game.dart';
-import '../widgets/game_board_widget.dart';
-import '../widgets/game_header_widget.dart';
-import '../widgets/game_controls.dart';
-import '../widgets/game_info_widget.dart';
+import 'package:snake_game/game/logic_game.dart';
+import 'package:snake_game/widgets/game_board_widget.dart';
+import 'package:snake_game/widgets/game_header_widget.dart';
+import 'package:snake_game/widgets/game_info_widget.dart';
+import 'package:snake_game/widgets/game_state_widget.dart';
 
 class GameBoard extends StatefulWidget {
   const GameBoard({super.key});
@@ -60,39 +60,54 @@ class _GameBoardState extends State<GameBoard> {
     return Scaffold(
       body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             // Заголовок и счет
             const GameHeaderWidget(),
 
             // Игровое поле
-            Center(
-              child: GameBoardWidget(game: _game, onSwipe: _handleSwipe),
+            GameStateWidget(
+              onFinished: _game.gameFinished,
+              onGameStateChange: (value) {
+                setState(() {
+                  switch (value) {
+                    case GameState.newGame:
+                      _game.startNewGame();
+                    case GameState.run:
+                      _game.togglePause();
+                    case GameState.paused:
+                      _game.togglePause();
+                    case GameState.finished:
+                      context.goNamed(root);
+                  }
+                });
+              },
+              child: Center(
+                child: GameBoardWidget(game: _game, onSwipe: _handleSwipe),
+              ),
             ),
 
             // Информация о состоянии игры
             const GameInfoWidget(),
 
-            const SizedBox(height: 100),
+            // // Управление игрой
+            // GameControls(
+            //   onPauseResume: () => setState(() {
+            //     _game.togglePause();
+            //   }),
+            //   onReset: () => setState(() {
+            //     _game.reset();
+            //   }),
+            // ),
 
-            // Управление игрой
-            GameControls(
-              onPauseResume: () => setState(() {
-                _game.togglePause();
-              }),
-              onReset: () => setState(() {
-                _game.reset();
-              }),
-            ),
-
-            // Кнопка назад
-            TextButton(
-              onPressed: () {
-                // Navigator.pop(context);
-                context.goNamed(root);
-              },
-              child: Text("Назад"),
-            ),
+            // // Кнопка назад
+            // TextButton(
+            //   onPressed: () {
+            //     // Navigator.pop(context);
+            //     context.goNamed(root);
+            //   },
+            //   child: Text("Назад"),
+            // ),
           ],
         ),
       ),

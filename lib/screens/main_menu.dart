@@ -27,13 +27,21 @@ class SimpleMenuScreen extends StatelessWidget {
                     },
                     child: const Text('Начало игры'),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
                       // Навигация к настройкам
                       context.goNamed(settings);
                     },
                     child: const Text('Настройки'),
+                  ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Навигация к рекордам
+                      context.goNamed(records);
+                    },
+                    child: const Text('Рекорды'),
                   ),
                 ],
               ),
