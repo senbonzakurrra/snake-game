@@ -46,13 +46,18 @@ class GameHeaderWidget extends StatelessWidget {
         children: [
           const Icon(Icons.star, color: Colors.amber, size: 20),
           const SizedBox(width: 8),
-          Text(
-            '${SnakeGame.score}',
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.green,
-            ),
+          ValueListenableBuilder(
+            valueListenable: SnakeGame.score,
+            builder: (context, value, child) {
+              return Text(
+                '${SnakeGame.score.value}',
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green,
+                ),
+              );
+            },
           ),
         ],
       ),

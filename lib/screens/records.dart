@@ -7,16 +7,12 @@ class Records extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scores = [300, 250, 200, 150, 100, 60, 40, 20];
-    final names = [
-      'Игрок 1',
-      'Игрок 2',
-      'Игрок 3',
-      'Игрок 4',
-      'Игрок 5',
-      'Игрок 6',
-      'Игрок 7',
-    ];
+    final results = List.generate(
+      10,
+      (index) =>
+          PlayerResults(name: 'Игрок ${index + 1}', score: (10 - index) * 100),
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Таблица рекордов'),
@@ -27,6 +23,7 @@ class Records extends StatelessWidget {
           },
         ),
       ),
+
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -41,7 +38,7 @@ class Records extends StatelessWidget {
             // Таблица рекордов
             Expanded(
               child: ListView.builder(
-                itemCount: scores.length,
+                itemCount: results.length,
                 itemBuilder: (context, index) {
                   return Card(
                     child: ListTile(
@@ -51,8 +48,8 @@ class Records extends StatelessWidget {
                           style: const TextStyle(color: Colors.blueAccent),
                         ),
                       ),
-                      title: Text(names[index]),
-                      subtitle: Text('${scores[index]} очков'),
+                      title: Text(results[index].name),
+                      subtitle: Text('${results[index].score} очков'),
                       trailing: Icon(
                         index < 3 ? Icons.star : Icons.emoji_events_outlined,
                         color: index < 3 ? Colors.amber : Colors.grey,
@@ -76,4 +73,11 @@ class Records extends StatelessWidget {
       ),
     );
   }
+}
+
+class PlayerResults {
+  final String name;
+  final int score;
+
+  PlayerResults({required this.name, required this.score});
 }

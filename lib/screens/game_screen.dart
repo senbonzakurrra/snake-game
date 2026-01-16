@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:snake_game/game/direction.dart';
-import 'package:snake_game/routing/app_routes.dart';
 import 'package:snake_game/game/logic_game.dart';
 import 'package:snake_game/widgets/game_board_widget.dart';
 import 'package:snake_game/widgets/game_header_widget.dart';
@@ -22,6 +20,7 @@ class _GameBoardState extends State<GameBoard> {
   void initState() {
     super.initState();
     _game = SnakeGame(onUpdate: _upDateGame);
+    _game.reset();
   }
 
   @override
@@ -71,14 +70,19 @@ class _GameBoardState extends State<GameBoard> {
               onGameStateChange: (value) {
                 setState(() {
                   switch (value) {
-                    case GameState.newGame:
-                      _game.startNewGame();
                     case GameState.run:
-                      _game.togglePause();
+                      if (SnakeGame.isPaused) {
+                        _game.togglePause();
+                      } else {
+                        _game.startNewGame();
+                      }
                     case GameState.paused:
                       _game.togglePause();
                     case GameState.finished:
-                      context.goNamed(root);
+                      break;
+
+                    case GameState.newGame:
+                      break;
                   }
                 });
               },
@@ -89,25 +93,6 @@ class _GameBoardState extends State<GameBoard> {
 
             // Информация о состоянии игры
             const GameInfoWidget(),
-
-            // // Управление игрой
-            // GameControls(
-            //   onPauseResume: () => setState(() {
-            //     _game.togglePause();
-            //   }),
-            //   onReset: () => setState(() {
-            //     _game.reset();
-            //   }),
-            // ),
-
-            // // Кнопка назад
-            // TextButton(
-            //   onPressed: () {
-            //     // Navigator.pop(context);
-            //     context.goNamed(root);
-            //   },
-            //   child: Text("Назад"),
-            // ),
           ],
         ),
       ),

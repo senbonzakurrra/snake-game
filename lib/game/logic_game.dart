@@ -1,9 +1,6 @@
 import 'dart:async';
 import 'dart:math';
-import 'dart:ui';
-
 import 'package:flutter/foundation.dart';
-
 import 'direction.dart';
 
 // Позиция на игровом поле
@@ -51,7 +48,7 @@ class SnakeGame {
   static double gameSpeed = 2;
 
   // Игровой счет
-  static int score = 0;
+  static ValueNotifier<int> score = ValueNotifier(0);
 
   // Состояние игры
   static bool isGameOver = false;
@@ -76,7 +73,7 @@ class SnakeGame {
       Position((gridSize ~/ 2) - 2, gridSize ~/ 2),
     ];
 
-    score = 0;
+    score.value = 0;
     nextDirection = Direction.right;
     isGameOver = false;
     isPaused = false;
@@ -143,11 +140,11 @@ class SnakeGame {
     // Проверка съедения еды
     if (food != null && newHead == food!) {
       // Увеличение счета
-      score += 10;
+      score.value += 10;
     }
 
     // Увеличение скорости каждые 50 очков
-    if (score % 50 == 0 && gameSpeed < 20) {
+    if (score.value % 50 == 0 && gameSpeed < 20) {
       gameSpeed++;
       gameTimer?.cancel();
       startGameLoop();
@@ -195,6 +192,7 @@ class SnakeGame {
     isGameOver = true;
     gameTimer?.cancel();
     onUpdate();
+    gameFinished.value = true;
   }
 
   // Управление направлением змейки
